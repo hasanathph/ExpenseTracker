@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="sidebar">
+    <h3 id="main">MAIN MENU</h3>
+
+    <h4 id="Transactions" class="active">Transactions</h4>
+    <h4 id="month">Monthly Tracker</h4>
+    <button id="logoutBtn">Logout</button>
+</div>
+
+    <div class="main">
+
+        <!-- OVERVIEW PAGE -->
+        <div id="overviewPage" style="display: none;">
+
+            <div class="head">
+                <h2>Overview</h2>
+                <p>Welcome to your Expense Tracker dashboard</p>
+            </div>
+
+            <div class="parent">
+
+                <div class="total">
+                    <h3>Total Transaction</h3>
+                    <h4 id="overviewTotal">₹0</h4>
+                </div>
+
+                <div class="income">
+                    <h3>Total Income</h3>
+                    <h4 id="overviewIncome">₹0</h4>
+                </div>
+
+                <div class="expense">
+                    <h3>Total Expense</h3>
+                    <h4 id="overviewExpense">₹0</h4>
+                </div>
+
+            </div>
+
+            <div class="activity">
+                <h3>Recent Transactions</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Method</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="overviewTransactions"></tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- TRANSACTIONS PAGE -->
+        <div id="transactionsContent">
+
+            <div class="head">
+                <div>
+                    <h2>Transactions</h2>
+                    <p id="p">View and manage all your income and expenses in one place</p>
+                </div>
+            </div>
+
+            <div class="modal" id="modal">
+                <div class="cntnt">
+                    <h3>Add Transaction</h3>
+                    <button id="close">X</button>
+
+                    <form id="myform">
+                        <label>Category</label>
+                        <div class="field">
+                            <select id="cat">
+                                <option value="">Select Category</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Groceries">Groceries</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Dining">Dining</option>
+                                <option value="Freelance">Freelance</option>
+                                <option value="Savings">Savings</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="wedding">wedding</option>
+                            </select>
+                            <small id="catError" class="error"></small>
+                        </div>
+
+                        <label>Date</label>
+                        <div class="field">
+                            <input type="date" id="date">
+                            <small id="dateError" class="error"></small>
+                        </div>
+
+                        <label>Amount</label>
+                        <div class="field">
+                            <input type="number" id="num" placeholder="enter amount">
+                            <small id="numError" class="error"></small>
+                        </div>
+
+                        <label>Type</label>
+                        <div class="field">
+                            <select id="type">
+                                <option value="">Select Type</option>
+                                <option value="Income">Income</option>
+                                <option value="Expense">Expense</option>
+                            </select>
+                            <small id="typeError" class="error"></small>
+                        </div>
+
+                        <label>Method</label>
+                        <div class="field">
+                            <input type="text" id="methd">
+                            <small id="methdError" class="error"></small>
+                        </div>
+
+                        <button type="submit" id="submit">Save Transaction</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="parent">
+                <div class="total">
+                    <h3>Total Transaction</h3>
+                    <h4 id="totalt">₹0</h4>
+                </div>
+
+                <div class="income">
+                    <h3>Incomes</h3>
+                    <h4 id="totalin">₹0</h4>
+
+                    <p>
+                        <span class="amount-change" id="incomechange">+₹392.00</span>
+                        <span class="description">from last month</span>
+                    </p>
+                </div>
+
+                <div class="expense">
+                    <h3>Expenses</h3>
+                    <h4 id="totalexp">₹0</h4>
+
+                    <p>
+                        <span class="amountch" id="expensechange">-₹392.00</span>
+                        <span class="description">from last month</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="activity">
+                <h3>Transaction Activity</h3>
+
+                <div class="search-row">
+                    <div class="searchbox">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search" placeholder="Search transactions....">
+                    </div>
+
+                    <select id="filter">
+                        <option value="all">All Categories</option>
+                        <option value="Salary">Salary</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Dining">Dining</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="wedding">Wedding</option>
+                    </select>
+
+                    <input type="date" id="fldte">
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Method</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="js"></tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- END TRANSACTIONS CONTENT -->
+
+    </div>
+    <!-- END MAIN -->
+
+    <div class="right" id="transactionsRight">
+
+        <button id="add">+ Add Transaction</button>
+
+        <div class="exp">
+            <h3>Expense Breakdown</h3>
+
+            <div class="cir">
+
+                <div class="bubblesavings">
+                    <h2 id="savingsPercent">62%</h2>
+                    <p>Savings</p>
+                </div>
+
+                <div class="bubblegroceries">
+                    <h2 id="groceriesPercent">18%</h2>
+                    <p>Groceries</p>
+                </div>
+
+                <div class="bubbletravel">
+                    <h2 id="travelPercent">12%</h2>
+                    <p>Travel</p>
+                </div>
+
+                <div class="bubbleothers">
+                    <h2 id="othersPercent">0%</h2>
+                    <p>Others</p>
+                </div>
+
+            </div>
+
+            <h4>Other Categories</h4>
+
+            <div id="otherCategories"></div>
+        </div>
+
+    </div>
+    <!-- END RIGHT -->
+
+</div>
+<!-- END DASHBOARD -->
+
+
+<div id="monthlyPage" style="display: none;">
+    <button id="backBtn">← Back</button>
+
+    <h2>Monthly Expense Tracker</h2>
+    <p>View your monthly spending summary</p>
+
+    <div id="monthlyList"></div>
+    <div id="monthlyDetails" style="display: none;"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
